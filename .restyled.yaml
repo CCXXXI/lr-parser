@@ -2,6 +2,8 @@ commit_template: |
   style: reformat by ${restyler.name}
 
 restylers:
+  - clang-format:
+      enabled: false
   - prettier-markdown:
       arguments: ["--prose-wrap", "preserve"]
   - "*"
