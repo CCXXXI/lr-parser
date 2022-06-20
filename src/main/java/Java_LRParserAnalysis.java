@@ -12,8 +12,7 @@ import java.util.Stack;
 public class Java_LRParserAnalysis {
 
   public static void main(String[] args) throws IOException {
-    final LRParser parser =
-        new LRParser(new LineNumberReader(new InputStreamReader(System.in)));
+    final LRParser parser = new LRParser(new LineNumberReader(new InputStreamReader(System.in)));
     final String result = parser.parse();
     final String error = parser.errorMessages.toString();
     System.out.println(error + result);
@@ -24,15 +23,15 @@ public class Java_LRParserAnalysis {
     return text.replaceFirst("(?s)(.*)" + regex, "$1" + replacement);
   }
 
-  @SuppressWarnings({"SpellCheckingInspection",
-                     "ArraysAsListWithZeroOrOneArgument",
-                     "PatternVariableCanBeUsed"})
+  @SuppressWarnings({
+    "SpellCheckingInspection",
+    "ArraysAsListWithZeroOrOneArgument",
+    "PatternVariableCanBeUsed"
+  })
   static class LRParser {
 
-    private static final Map<String, Map<Integer, Action>> transitions =
-        new HashMap<>();
-    private static final Map<String, Map<Integer, Integer>> gotoTable =
-        new HashMap<>();
+    private static final Map<String, Map<Integer, Action>> transitions = new HashMap<>();
+    private static final Map<String, Map<Integer, Integer>> gotoTable = new HashMap<>();
 
     // The stupid platform only supports Java 8,
     // so we have to use this stupid way to init the set and the map.
@@ -794,42 +793,38 @@ public class Java_LRParserAnalysis {
     }
 
     public final StringBuilder errorMessages = new StringBuilder();
-    final List<Grammar> grammars = Arrays.asList(
-        new Grammar("program", Arrays.asList("compoundstmt")),
-        new Grammar("stmt", Arrays.asList("ifstmt")),
-        new Grammar("stmt", Arrays.asList("whilestmt")),
-        new Grammar("stmt", Arrays.asList("assgstmt")),
-        new Grammar("stmt", Arrays.asList("compoundstmt")),
-        new Grammar("compoundstmt", Arrays.asList("{", "stmts", "}")),
-        new Grammar("stmts", Arrays.asList("stmt", "stmts")),
-        new Grammar("stmts", Arrays.asList()),
-        new Grammar("ifstmt", Arrays.asList("if", "(", "boolexpr", ")", "then",
-                                            "stmt", "else", "stmt")),
-        new Grammar("whilestmt",
-                    Arrays.asList("while", "(", "boolexpr", ")", "stmt")),
-        new Grammar("assgstmt", Arrays.asList("ID", "=", "arithexpr", ";")),
-        new Grammar("boolexpr",
-                    Arrays.asList("arithexpr", "boolop", "arithexpr")),
-        new Grammar("boolop", Arrays.asList("<")),
-        new Grammar("boolop", Arrays.asList(">")),
-        new Grammar("boolop", Arrays.asList("<=")),
-        new Grammar("boolop", Arrays.asList(">=")),
-        new Grammar("boolop", Arrays.asList("==")),
-        new Grammar("arithexpr", Arrays.asList("multexpr", "arithexprprime")),
-        new Grammar("arithexprprime",
-                    Arrays.asList("+", "multexpr", "arithexprprime")),
-        new Grammar("arithexprprime",
-                    Arrays.asList("-", "multexpr", "arithexprprime")),
-        new Grammar("arithexprprime", Arrays.asList()),
-        new Grammar("multexpr", Arrays.asList("simpleexpr", "multexprprime")),
-        new Grammar("multexprprime",
-                    Arrays.asList("*", "simpleexpr", "multexprprime")),
-        new Grammar("multexprprime",
-                    Arrays.asList("/", "simpleexpr", "multexprprime")),
-        new Grammar("multexprprime", Arrays.asList()),
-        new Grammar("simpleexpr", Arrays.asList("ID")),
-        new Grammar("simpleexpr", Arrays.asList("NUM")),
-        new Grammar("simpleexpr", Arrays.asList("(", "arithexpr", ")")));
+    final List<Grammar> grammars =
+        Arrays.asList(
+            new Grammar("program", Arrays.asList("compoundstmt")),
+            new Grammar("stmt", Arrays.asList("ifstmt")),
+            new Grammar("stmt", Arrays.asList("whilestmt")),
+            new Grammar("stmt", Arrays.asList("assgstmt")),
+            new Grammar("stmt", Arrays.asList("compoundstmt")),
+            new Grammar("compoundstmt", Arrays.asList("{", "stmts", "}")),
+            new Grammar("stmts", Arrays.asList("stmt", "stmts")),
+            new Grammar("stmts", Arrays.asList()),
+            new Grammar(
+                "ifstmt",
+                Arrays.asList("if", "(", "boolexpr", ")", "then", "stmt", "else", "stmt")),
+            new Grammar("whilestmt", Arrays.asList("while", "(", "boolexpr", ")", "stmt")),
+            new Grammar("assgstmt", Arrays.asList("ID", "=", "arithexpr", ";")),
+            new Grammar("boolexpr", Arrays.asList("arithexpr", "boolop", "arithexpr")),
+            new Grammar("boolop", Arrays.asList("<")),
+            new Grammar("boolop", Arrays.asList(">")),
+            new Grammar("boolop", Arrays.asList("<=")),
+            new Grammar("boolop", Arrays.asList(">=")),
+            new Grammar("boolop", Arrays.asList("==")),
+            new Grammar("arithexpr", Arrays.asList("multexpr", "arithexprprime")),
+            new Grammar("arithexprprime", Arrays.asList("+", "multexpr", "arithexprprime")),
+            new Grammar("arithexprprime", Arrays.asList("-", "multexpr", "arithexprprime")),
+            new Grammar("arithexprprime", Arrays.asList()),
+            new Grammar("multexpr", Arrays.asList("simpleexpr", "multexprprime")),
+            new Grammar("multexprprime", Arrays.asList("*", "simpleexpr", "multexprprime")),
+            new Grammar("multexprprime", Arrays.asList("/", "simpleexpr", "multexprprime")),
+            new Grammar("multexprprime", Arrays.asList()),
+            new Grammar("simpleexpr", Arrays.asList("ID")),
+            new Grammar("simpleexpr", Arrays.asList("NUM")),
+            new Grammar("simpleexpr", Arrays.asList("(", "arithexpr", ")")));
     private final LineNumberReader reader;
     private final Stack<Integer> stack = new Stack<>();
     private Scanner scanner;
@@ -838,7 +833,9 @@ public class Java_LRParserAnalysis {
 
     // endregion
 
-    public LRParser(LineNumberReader reader) { this.reader = reader; }
+    public LRParser(LineNumberReader reader) {
+      this.reader = reader;
+    }
 
     public String parse() throws IOException {
       nextSymbol();
@@ -848,10 +845,9 @@ public class Java_LRParserAnalysis {
 
       while (true) {
         int s = stack.peek();
-        Action action =
-            transitions.get(patch == null ? currentSymbol : patch).get(s);
+        Action action = transitions.get(patch == null ? currentSymbol : patch).get(s);
         if (action instanceof Shift) {
-          Shift shift = (Shift)action;
+          Shift shift = (Shift) action;
           stack.push(shift.state);
           if (patch == null) {
             nextSymbol();
@@ -859,7 +855,7 @@ public class Java_LRParserAnalysis {
             patch = null;
           }
         } else if (action instanceof Reduce) {
-          Reduce reduce = (Reduce)action;
+          Reduce reduce = (Reduce) action;
           for (int i = 0; i < grammars.get(reduce.num).to.size(); i++) {
             stack.pop();
           }
@@ -871,14 +867,10 @@ public class Java_LRParserAnalysis {
         } else {
           Action guess = transitions.get(";").get(s);
           if (guess == null) {
-            errorMessages.append("无法恢复的语法错误，第")
-                .append(reader.getLineNumber())
-                .append("行\n");
+            errorMessages.append("无法恢复的语法错误，第").append(reader.getLineNumber()).append("行\n");
             break;
           } else {
-            errorMessages.append("语法错误，第")
-                .append(reader.getLineNumber() - 1)
-                .append("行，缺少\";\"\n");
+            errorMessages.append("语法错误，第").append(reader.getLineNumber() - 1).append("行，缺少\";\"\n");
             patch = ";";
           }
         }
@@ -889,9 +881,12 @@ public class Java_LRParserAnalysis {
       String cur = "compoundstmt";
       for (int i = result.size() - 1; i >= 0; i--) {
         Reduce reduce = result.get(i);
-        cur = replaceLast(cur, grammars.get(reduce.num).from,
-                          String.join(" ", grammars.get(reduce.num).to))
-                  .replaceAll(" +", " ");
+        cur =
+            replaceLast(
+                    cur,
+                    grammars.get(reduce.num).from,
+                    String.join(" ", grammars.get(reduce.num).to))
+                .replaceAll(" +", " ");
         sb.append(cur);
         if (i != 0) {
           sb.append(" => \n");
@@ -903,8 +898,7 @@ public class Java_LRParserAnalysis {
     /**
      * Reads the next symbol from the input.
      *
-     * @see <a href="https://stackoverflow.com/a/1332316/13805358">Stack
-     *     Overflow</a>
+     * @see <a href="https://stackoverflow.com/a/1332316/13805358">Stack Overflow</a>
      */
     private void nextSymbol() throws IOException {
       if (scanner != null && scanner.hasNext()) {
@@ -926,14 +920,18 @@ public class Java_LRParserAnalysis {
 
       int num;
 
-      Reduce(int num) { this.num = num; }
+      Reduce(int num) {
+        this.num = num;
+      }
     }
 
     static class Shift implements Action {
 
       int state;
 
-      Shift(int state) { this.state = state; }
+      Shift(int state) {
+        this.state = state;
+      }
     }
 
     static class Acc implements Action {}
