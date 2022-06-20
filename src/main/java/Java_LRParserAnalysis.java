@@ -886,7 +886,7 @@ public class Java_LRParserAnalysis {
                     cur,
                     grammars.get(reduce.num).from,
                     String.join(" ", grammars.get(reduce.num).to))
-                .replaceAll(" +", " ");
+                .replace("  ", " ");
         sb.append(cur);
         if (i != 0) {
           sb.append(" => \n");
