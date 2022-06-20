@@ -1,0 +1,109 @@
+"{
+ ID = NUM ;
+}","program =>
+compoundstmt =>
+{ stmts } =>
+{ stmt stmts } =>
+{ stmt } =>
+{ assgstmt } =>
+{ ID = arithexpr ; } =>
+{ ID = multexpr arithexprprime ; } =>
+{ ID = multexpr ; } =>
+{ ID = simpleexpr multexprprime ; } =>
+{ ID = simpleexpr ; } =>
+{ ID = NUM ; } "
+"{
+ID = ID + NUM ;
+}","program =>
+compoundstmt =>
+{ stmts } =>
+{ stmt stmts } =>
+{ stmt } =>
+{ assgstmt } =>
+{ ID = arithexpr ; } =>
+{ ID = multexpr arithexprprime ; } =>
+{ ID = multexpr + multexpr arithexprprime ; } =>
+{ ID = multexpr + multexpr ; } =>
+{ ID = multexpr + simpleexpr multexprprime ; } =>
+{ ID = multexpr + simpleexpr ; } =>
+{ ID = multexpr + NUM ; } =>
+{ ID = simpleexpr multexprprime + NUM ; } =>
+{ ID = simpleexpr + NUM ; } =>
+{ ID = ID + NUM ; } "
+"{
+while ( ID == NUM )
+{
+ID = NUM
+}
+}","语法错误，第4行，缺少"";""
+program =>
+compoundstmt =>
+{ stmts } =>
+{ stmt stmts } =>
+{ stmt } =>
+{ whilestmt } =>
+{ while ( boolexpr ) stmt } =>
+{ while ( boolexpr ) compoundstmt } =>
+{ while ( boolexpr ) { stmts } } =>
+{ while ( boolexpr ) { stmt stmts } } =>
+{ while ( boolexpr ) { stmt } } =>
+{ while ( boolexpr ) { assgstmt } } =>
+{ while ( boolexpr ) { ID = arithexpr ; } } =>
+{ while ( boolexpr ) { ID = multexpr arithexprprime ; } } =>
+{ while ( boolexpr ) { ID = multexpr ; } } =>
+{ while ( boolexpr ) { ID = simpleexpr multexprprime ; } } =>
+{ while ( boolexpr ) { ID = simpleexpr ; } } =>
+{ while ( boolexpr ) { ID = NUM ; } } =>
+{ while ( arithexpr boolop arithexpr ) { ID = NUM ; } } =>
+{ while ( arithexpr boolop multexpr arithexprprime ) { ID = NUM ; } } =>
+{ while ( arithexpr boolop multexpr ) { ID = NUM ; } } =>
+{ while ( arithexpr boolop simpleexpr multexprprime ) { ID = NUM ; } } =>
+{ while ( arithexpr boolop simpleexpr ) { ID = NUM ; } } =>
+{ while ( arithexpr boolop NUM ) { ID = NUM ; } } =>
+{ while ( arithexpr == NUM ) { ID = NUM ; } } =>
+{ while ( multexpr arithexprprime == NUM ) { ID = NUM ; } } =>
+{ while ( multexpr == NUM ) { ID = NUM ; } } =>
+{ while ( simpleexpr multexprprime == NUM ) { ID = NUM ; } } =>
+{ while ( simpleexpr == NUM ) { ID = NUM ; } } =>
+{ while ( ID == NUM ) { ID = NUM ; } } "
+"{
+if ( ID == ID )
+then
+ID = NUM ;
+else
+ID = ID * NUM ;
+}","program =>
+compoundstmt =>
+{ stmts } =>
+{ stmt stmts } =>
+{ stmt } =>
+{ ifstmt } =>
+{ if ( boolexpr ) then stmt else stmt } =>
+{ if ( boolexpr ) then stmt else assgstmt } =>
+{ if ( boolexpr ) then stmt else ID = arithexpr ; } =>
+{ if ( boolexpr ) then stmt else ID = multexpr arithexprprime ; } =>
+{ if ( boolexpr ) then stmt else ID = multexpr ; } =>
+{ if ( boolexpr ) then stmt else ID = simpleexpr multexprprime ; } =>
+{ if ( boolexpr ) then stmt else ID = simpleexpr * simpleexpr multexprprime ; } =>
+{ if ( boolexpr ) then stmt else ID = simpleexpr * simpleexpr ; } =>
+{ if ( boolexpr ) then stmt else ID = simpleexpr * NUM ; } =>
+{ if ( boolexpr ) then stmt else ID = ID * NUM ; } =>
+{ if ( boolexpr ) then assgstmt else ID = ID * NUM ; } =>
+{ if ( boolexpr ) then ID = arithexpr ; else ID = ID * NUM ; } =>
+{ if ( boolexpr ) then ID = multexpr arithexprprime ; else ID = ID * NUM ; } =>
+{ if ( boolexpr ) then ID = multexpr ; else ID = ID * NUM ; } =>
+{ if ( boolexpr ) then ID = simpleexpr multexprprime ; else ID = ID * NUM ; } =>
+{ if ( boolexpr ) then ID = simpleexpr ; else ID = ID * NUM ; } =>
+{ if ( boolexpr ) then ID = NUM ; else ID = ID * NUM ; } =>
+{ if ( arithexpr boolop arithexpr ) then ID = NUM ; else ID = ID * NUM ; } =>
+{ if ( arithexpr boolop multexpr arithexprprime ) then ID = NUM ; else ID = ID * NUM ; } =>
+{ if ( arithexpr boolop multexpr ) then ID = NUM ; else ID = ID * NUM ; } =>
+{ if ( arithexpr boolop simpleexpr multexprprime ) then ID = NUM ; else ID = ID * NUM ; } =>
+{ if ( arithexpr boolop simpleexpr ) then ID = NUM ; else ID = ID * NUM ; } =>
+{ if ( arithexpr boolop ID ) then ID = NUM ; else ID = ID * NUM ; } =>
+{ if ( arithexpr == ID ) then ID = NUM ; else ID = ID * NUM ; } =>
+{ if ( multexpr arithexprprime == ID ) then ID = NUM ; else ID = ID * NUM ; } =>
+{ if ( multexpr == ID ) then ID = NUM ; else ID = ID * NUM ; } =>
+{ if ( simpleexpr multexprprime == ID ) then ID = NUM ; else ID = ID * NUM ; } =>
+{ if ( simpleexpr == ID ) then ID = NUM ; else ID = ID * NUM ; } =>
+{ if ( ID == ID ) then ID = NUM ; else ID = ID * NUM ; } "
